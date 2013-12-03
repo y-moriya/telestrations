@@ -33,6 +33,7 @@
     <div class="col-md-6">
         <h2>Sketch.js Test</h2>
         <canvas id='simple_sketch' width='400' height='400' style='border: 2px solid black'></canvas>
+        <input type="button" id="save_sketch" value="save" />
     </div>
 </div>
 
@@ -40,6 +41,18 @@
 <script type='text/javascript'>
     $(function () {
         $('#simple_sketch').sketch();
+        $('#save_sketch').click(function () {
+            var imgdata = $('#simple_sketch')[0].toDataURL().replace('data:image/png;base64,', '');
+            var sendData = { Data: imgdata, Comment: 'comment' };
+            $.ajax({
+                type: 'POST',
+                url: 'Home/CanvasUpload', // TODO: 正しいURIとってきたい
+                data: JSON.stringify(sendData),
+                contentType: 'application/json',
+                dataType: 'json'
+            });
+            // TODO: complete で canvas クリアしたい
+        });
     });
 </script>
 }
