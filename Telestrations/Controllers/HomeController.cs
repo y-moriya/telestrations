@@ -35,6 +35,8 @@ namespace Telestrations.Controllers
         [HttpPost]
         public ActionResult CanvasUpload(CanvasInputModel inputModel)
         {
+            // TODO: 諸々
+
             var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnection"].ConnectionString);
             var blobStorage = storageAccount.CreateCloudBlobClient();
             var container = blobStorage.GetContainerReference("canvasimages");
