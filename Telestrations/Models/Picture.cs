@@ -7,20 +7,17 @@ using System.Web;
 
 namespace Telestrations.Models
 {
-    public class SketchBook
+    public class Picture
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        public string Uri { get; set; }
         public string Author { get; set; }
-        public string QuestionWord { get; set; }
 
-        public List<Picture> Pictures { get; set; }
-
-        public Game Game { get; set; }
-        [ForeignKey("Game")]
-        public int GameId { get; set; }
-
+        public SketchBook SketchBook { get; set; }
+        [ForeignKey("SketchBook")]
+        public int SketchBookId { get; set; }
     }
 }

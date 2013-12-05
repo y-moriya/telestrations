@@ -13,11 +13,16 @@ namespace Telestrations.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        public SketchBook CurrentSketchBook { get; set; }
+        [ForeignKey("SketchBook")]
+        public int CurrentSketchBookId { get; set; }
+
+        public bool HasSentPicture { get; set; }
         public string UserName { get; set; }
 
-        public Room Room { get; set; }
-        [ForeignKey("Room")]
-        public int RommId { get; set; }
+        public Game Game { get; set; }
+        [ForeignKey("Game")]
+        public int GameId { get; set; }
 
     }
 }
