@@ -54,7 +54,7 @@ namespace Telestrations.Tests.Models
 
         public List<Player> GetPlayers(int gameId)
         {
-            return this.Players.Where(p => p.GameId == gameId).ToList();
+            return this.Players.Where(p => p.Game.Id == gameId).ToList();
         }
 
         public void AddPlayer(Player player)
@@ -82,7 +82,7 @@ namespace Telestrations.Tests.Models
 
         public List<SketchBook> GetSketchBooks(int gameId)
         {
-            return this.SketchBooks.Where(sb => sb.GameId == gameId).ToList();
+            return this.SketchBooks.Where(sb => sb.Game.Id == gameId).ToList();
         }
 
         public void AddPicture(Picture pic)
@@ -100,7 +100,7 @@ namespace Telestrations.Tests.Models
 
         public List<Picture> GetPictures(int sbookId)
         {
-            return this.Pictures.Where(pic => pic.SketchBookId == sbookId).ToList();
+            return this.Pictures.Where(pic => pic.SketchBook.Id == sbookId).ToList();
         }
 
         public void AddSketchBook(SketchBook sbook)
@@ -119,6 +119,11 @@ namespace Telestrations.Tests.Models
         public void Save()
         {
 
+        }
+
+        public List<Room> GetRooms()
+        {
+            return Rooms;
         }
     }
 }

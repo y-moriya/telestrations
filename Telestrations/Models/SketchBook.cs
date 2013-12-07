@@ -17,10 +17,9 @@ namespace Telestrations.Models
         public string QuestionWord { get; set; }
 
         public List<Picture> Pictures { get; set; }
+        public virtual Game Game { get; set; }
 
-        public Game Game { get; set; }
-        [ForeignKey("Game")]
-        public int GameId { get; set; }
-
+        [Timestamp]
+        public byte[] Version { get; set; }
     }
 }

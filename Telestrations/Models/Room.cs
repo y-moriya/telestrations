@@ -20,6 +20,26 @@ namespace Telestrations.Models
         public DbSet<Player> Players { get; set; }
         public DbSet<SketchBook> SketchBooks { get; set; }
         public DbSet<Picture> Pictures { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Player>().HasRequired(p => p.Game)
+                                         .WithMany(g => g.Players)
+                                         .Map(x => x.MapKey("PlayerId"))
+                                         .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<SketchBook>().HasRequired(sb => sb.Game)
+                                             .WithMany(g => g.SketchBooks)
+                                             .Map(x => x.MapKey("SketchBookId"))
+                                             .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Picture>().HasRequired(pic => pic.SketchBook)
+                                          .WithMany(sb => sb.Pictures)
+                                          .Map(x => x.MapKey("PictureId"))
+                                          .WillCascadeOnDelete(true);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 
     public class Room

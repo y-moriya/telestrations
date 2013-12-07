@@ -34,20 +34,20 @@ namespace Telestrations.Tests.Models
             service.Load(1);
 
             Assert.IsTrue(service.CanJoinGame("euro"));
-
-            var p = new Player() { UserName = "euro", GameId = 1 };
+            var g = service.CurrentGame;
+            var p = new Player() { UserName = "euro", Game = g };
             service.JoinCurrentGame(p);
             service.Reload();
             Assert.IsFalse(service.CanJoinGame("euro"));
             Assert.IsTrue(service.CanJoinGame("euro2"));
 
-            service.JoinCurrentGame(new Player() { UserName = "euro2", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro3", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro4", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro5", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro6", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro7", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro8", GameId = 1 });
+            service.JoinCurrentGame(new Player() { UserName = "euro2", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro3", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro4", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro5", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro6", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro7", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro8", Game = g });
             service.Reload();
             Assert.IsFalse(service.CanJoinGame("euro9"));
             service.LeaveCurrentGame(p);
@@ -67,7 +67,8 @@ namespace Telestrations.Tests.Models
 
             Assert.AreEqual(0, service.CurrentGame.Players.Count);
 
-            var p = new Player() { UserName = "euro", GameId = 1 };
+            var g = service.CurrentGame;
+            var p = new Player() { UserName = "euro", Game = g };
             service.JoinCurrentGame(p);
             service.Reload();
 
@@ -82,7 +83,8 @@ namespace Telestrations.Tests.Models
 
             Assert.AreEqual(0, service.CurrentGame.Players.Count);
 
-            var p = new Player() { UserName = "euro", GameId = 1 };
+            var g = service.CurrentGame;
+            var p = new Player() { UserName = "euro", Game = g };
             service.JoinCurrentGame(p);
             service.Reload();
 
@@ -102,10 +104,11 @@ namespace Telestrations.Tests.Models
 
             Assert.IsFalse(service.CanStartGame());
 
-            service.JoinCurrentGame(new Player() { UserName = "euro1", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro2", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro3", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro4", GameId = 1 });
+            var g = service.CurrentGame;
+            service.JoinCurrentGame(new Player() { UserName = "euro1", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro2", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro3", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro4", Game = g });
             service.Reload();
             Assert.IsTrue(service.CanStartGame());
 
@@ -119,10 +122,11 @@ namespace Telestrations.Tests.Models
             RoomService service = GetTestService();
             service.Load(1);
 
-            service.JoinCurrentGame(new Player() { UserName = "euro1", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro2", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro3", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro4", GameId = 1 });
+            var g = service.CurrentGame;
+            service.JoinCurrentGame(new Player() { UserName = "euro1", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro2", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro3", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro4", Game = g });
             service.Reload();
 
             service.StartCurrentGame();
@@ -142,10 +146,11 @@ namespace Telestrations.Tests.Models
             RoomService service = GetTestService();
             service.Load(1);
 
-            service.JoinCurrentGame(new Player() { UserName = "euro1", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro2", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro3", GameId = 1 });
-            service.JoinCurrentGame(new Player() { UserName = "euro4", GameId = 1 });
+            var g = service.CurrentGame;
+            service.JoinCurrentGame(new Player() { UserName = "euro1", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro2", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro3", Game = g });
+            service.JoinCurrentGame(new Player() { UserName = "euro4", Game = g });
             service.Reload();
 
             var p = service.GetPlayerByUserName("euro1");
@@ -158,10 +163,11 @@ namespace Telestrations.Tests.Models
             RoomService service = GetTestService();
             service.Load(1);
 
-            var pl1 = new Player() { UserName = "euro1", GameId = 1 };
-            var pl2 = new Player() { UserName = "euro2", GameId = 1 };
-            var pl3 = new Player() { UserName = "euro3", GameId = 1 };
-            var pl4 = new Player() { UserName = "euro4", GameId = 1 };
+            var g = service.CurrentGame;
+            var pl1 = new Player() { UserName = "euro1", Game = g };
+            var pl2 = new Player() { UserName = "euro2", Game = g };
+            var pl3 = new Player() { UserName = "euro3", Game = g };
+            var pl4 = new Player() { UserName = "euro4", Game = g };
 
             service.JoinCurrentGame(pl1);
             service.JoinCurrentGame(pl2);
@@ -189,10 +195,11 @@ namespace Telestrations.Tests.Models
 
             Assert.IsFalse(service.CanUpdateRound());
 
-            var pl1 = new Player() { UserName = "euro1", GameId = 1 };
-            var pl2 = new Player() { UserName = "euro2", GameId = 1 };
-            var pl3 = new Player() { UserName = "euro3", GameId = 1 };
-            var pl4 = new Player() { UserName = "euro4", GameId = 1 };
+            var g = service.CurrentGame;
+            var pl1 = new Player() { UserName = "euro1", Game = g };
+            var pl2 = new Player() { UserName = "euro2", Game = g };
+            var pl3 = new Player() { UserName = "euro3", Game = g };
+            var pl4 = new Player() { UserName = "euro4", Game = g };
 
             service.JoinCurrentGame(pl1);
             service.JoinCurrentGame(pl2);
@@ -225,10 +232,11 @@ namespace Telestrations.Tests.Models
         {
             RoomService service = GetTestService();
             service.Load(1);
-            var pl1 = new Player() { UserName = "euro1", GameId = 1 };
-            var pl2 = new Player() { UserName = "euro2", GameId = 1 };
-            var pl3 = new Player() { UserName = "euro3", GameId = 1 };
-            var pl4 = new Player() { UserName = "euro4", GameId = 1 };
+            var g = service.CurrentGame;
+            var pl1 = new Player() { UserName = "euro1", Game = g };
+            var pl2 = new Player() { UserName = "euro2", Game = g };
+            var pl3 = new Player() { UserName = "euro3", Game = g };
+            var pl4 = new Player() { UserName = "euro4", Game = g };
 
             service.JoinCurrentGame(pl1);
             service.JoinCurrentGame(pl2);
@@ -250,10 +258,11 @@ namespace Telestrations.Tests.Models
         {
             RoomService service = GetTestService();
             service.Load(1);
-            var pl1 = new Player() { UserName = "euro1", GameId = 1 };
-            var pl2 = new Player() { UserName = "euro2", GameId = 1 };
-            var pl3 = new Player() { UserName = "euro3", GameId = 1 };
-            var pl4 = new Player() { UserName = "euro4", GameId = 1 };
+            var g = service.CurrentGame;
+            var pl1 = new Player() { UserName = "euro1", Game = g };
+            var pl2 = new Player() { UserName = "euro2", Game = g };
+            var pl3 = new Player() { UserName = "euro3", Game = g };
+            var pl4 = new Player() { UserName = "euro4", Game = g };
 
             service.JoinCurrentGame(pl1);
             service.JoinCurrentGame(pl2);
@@ -292,10 +301,11 @@ namespace Telestrations.Tests.Models
 
             Assert.IsFalse(service.CanFinishGame());
 
-            var pl1 = new Player() { UserName = "euro1", GameId = 1 };
-            var pl2 = new Player() { UserName = "euro2", GameId = 1 };
-            var pl3 = new Player() { UserName = "euro3", GameId = 1 };
-            var pl4 = new Player() { UserName = "euro4", GameId = 1 };
+            var g = service.CurrentGame;
+            var pl1 = new Player() { UserName = "euro1", Game = g };
+            var pl2 = new Player() { UserName = "euro2", Game = g };
+            var pl3 = new Player() { UserName = "euro3", Game = g };
+            var pl4 = new Player() { UserName = "euro4", Game = g };
 
             service.JoinCurrentGame(pl1);
             service.JoinCurrentGame(pl2);

@@ -13,25 +13,21 @@ namespace Telestrations.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public SketchBook CurrentSketchBook { get; set; }
-        [ForeignKey("SketchBook")]
-        public int CurrentSketchBookId { get; set; }
-
+        public virtual SketchBook CurrentSketchBook { get; set; }
         public int NextSketchBookId { get; set; }
 
         public bool HasSentPicture { get; set; }
         public string UserName { get; set; }
+        public virtual Game Game { get; set; }
 
-        public Game Game { get; set; }
-        [ForeignKey("Game")]
-        public int GameId { get; set; }
+        [Timestamp]
+        public byte[] Version { get; set; }
 
         public Picture DrawPicture(string uri)
         {
             return new Picture()
             {
                 Author = this.UserName,
-                SketchBookId = this.CurrentSketchBookId,
                 SketchBook = this.CurrentSketchBook,
                 Uri = uri
             };

@@ -16,8 +16,6 @@ namespace Telestrations.Models
         public string Uri { get; set; }
         public string Author { get; set; }
 
-        public SketchBook SketchBook { get; set; }
-        [ForeignKey("SketchBook")]
-        public int SketchBookId { get; set; }
+        public virtual SketchBook SketchBook { get; set; }
     }
 }

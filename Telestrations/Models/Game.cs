@@ -17,7 +17,7 @@ namespace Telestrations.Models
 
         public Nullable<DateTime> StartedAt { get; set; }
 
-        public Room Room { get; set; }
+        public virtual Room Room { get; set; }
         [ForeignKey("Room")]
         public int RoomId { get; set; }
 
@@ -25,6 +25,9 @@ namespace Telestrations.Models
 
         public List<Player> Players { get; set; }
         public List<SketchBook> SketchBooks { get; set; }
+
+        [Timestamp]
+        public byte[] Version { get; set; }
 
         public Game()
         {
