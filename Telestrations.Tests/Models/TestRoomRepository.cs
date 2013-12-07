@@ -59,6 +59,14 @@ namespace Telestrations.Tests.Models
 
         public void AddPlayer(Player player)
         {
+            if (this.Players.Count == 0)
+            {
+                player.Id = 1;
+            }
+            else
+            {
+                player.Id = this.Players.Max(p => p.Id) + 1;
+            }
             this.Players.Add(player);
         }
 
@@ -79,6 +87,14 @@ namespace Telestrations.Tests.Models
 
         public void AddPicture(Picture pic)
         {
+            if (this.Pictures.Count == 0)
+            {
+                pic.Id = 1;
+            }
+            else
+            {
+                pic.Id = this.Pictures.Max(sb => sb.Id) + 1;
+            }
             this.Pictures.Add(pic);
         }
 
@@ -89,6 +105,14 @@ namespace Telestrations.Tests.Models
 
         public void AddSketchBook(SketchBook sbook)
         {
+            if (this.SketchBooks.Count == 0)
+            {
+                sbook.Id = 1;
+            }
+            else
+            {
+                sbook.Id = this.SketchBooks.Max(sb => sb.Id) + 1;
+            }
             this.SketchBooks.Add(sbook);
         }
 

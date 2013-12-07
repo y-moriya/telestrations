@@ -17,6 +17,8 @@ namespace Telestrations.Models
         [ForeignKey("SketchBook")]
         public int CurrentSketchBookId { get; set; }
 
+        public int NextSketchBookId { get; set; }
+
         public bool HasSentPicture { get; set; }
         public string UserName { get; set; }
 
@@ -24,5 +26,15 @@ namespace Telestrations.Models
         [ForeignKey("Game")]
         public int GameId { get; set; }
 
+        public Picture DrawPicture(string uri)
+        {
+            return new Picture()
+            {
+                Author = this.UserName,
+                SketchBookId = this.CurrentSketchBookId,
+                SketchBook = this.CurrentSketchBook,
+                Uri = uri
+            };
+        }
     }
 }

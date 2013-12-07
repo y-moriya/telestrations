@@ -19,6 +19,7 @@ namespace Telestrations.Models
         public DbSet<Game> Games { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<SketchBook> SketchBooks { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
     }
 
     public class Room

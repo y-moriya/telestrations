@@ -38,6 +38,7 @@ namespace Telestrations.Models
     {
         Waiting,
         Progress,
-        Finished
+        Finished,
+        Closed
     }
 }
